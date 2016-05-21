@@ -1,6 +1,6 @@
 // const firebase = require('firebase');
-// const firebase = global.firebase;
-import firebase from 'firebase';
+const firebase = global.firebase;
+// import firebase from 'firebase';
 import {mount} from 'react-mounter';
 import page from 'page';
 import qs from 'qs';
