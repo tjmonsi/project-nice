@@ -26789,7 +26789,6 @@
 	    storageBucket: 'project-nice.appspot.com'
 	  };
 
-	  console.log(firebase);
 	  firebase.initializeApp(config);
 	  var database = firebase.database();
 
@@ -32180,31 +32179,31 @@
 	    provider.addScope('profile');
 	    provider.addScope('email');
 	    firebase.auth().signInWithRedirect(provider);
-	    firebase.auth().getRedirectResult().then(function (result) {
-	      if (result.credential) {
-	        // This gives you a Google Access Token. You can use it to access the Google API.
-	        var token = result.credential.accessToken;
-	        console.log(token);
-	        console.log(result);
-	        // ...
-	      }
-	      // The signed-in user info.
-	      var user = result.user;
-	      console.log(user);
-	    }).catch(function (error) {
-	      // Handle Errors here.
-	      var errorCode = error.code;
-	      var errorMessage = error.message;
-	      // The email of the user's account used.
-	      var email = error.email;
-	      // The firebase.auth.AuthCredential type that was used.
-	      var credential = error.credential;
-	      // ...;
-	      console.log(errorCode);
-	      console.log(errorMessage);
-	      console.log(email);
-	      console.log(credential);
-	    });
+	    // firebase.auth().getRedirectResult().then((result) => {
+	    //   if (result.credential) {
+	    //     // This gives you a Google Access Token. You can use it to access the Google API.
+	    //     const token = result.credential.accessToken;
+	    //     console.log(token);
+	    //     console.log(result);
+	    //     // ...
+	    //   }
+	    //   // The signed-in user info.
+	    //   const user = result.user;
+	    //   console.log(user);
+	    // }).catch((error) => {
+	    //   // Handle Errors here.
+	    //   const errorCode = error.code;
+	    //   const errorMessage = error.message;
+	    //   // The email of the user's account used.
+	    //   const email = error.email;
+	    //   // The firebase.auth.AuthCredential type that was used.
+	    //   const credential = error.credential;
+	    //   // ...;
+	    //   console.log(errorCode);
+	    //   console.log(errorMessage);
+	    //   console.log(email);
+	    //   console.log(credential);
+	    // });
 	  },
 	  logout: function logout(context) {
 	    var firebase = context.firebase;
@@ -32240,6 +32239,10 @@
 
 	var _logoText2 = _interopRequireDefault(_logoText);
 
+	var _authLink = __webpack_require__(377);
+
+	var _authLink2 = _interopRequireDefault(_authLink);
+
 	var _header = __webpack_require__(371);
 
 	var _header2 = _interopRequireDefault(_header);
@@ -32249,8 +32252,6 @@
 	var _drawer2 = _interopRequireDefault(_drawer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// import Home from './components/home.jsx';
 
 	exports.default = function (injectDeps, context) {
 	  var mount = context.mount;
@@ -32263,6 +32264,11 @@
 	      displayName: 'LogoText'
 	    });
 	  };
+	  var authLink = function authLink() {
+	    return _react2.default.createElement(_authLink2.default, {
+	      displayName: 'AuthLink'
+	    });
+	  };
 
 	  page('/', function (ctx) {
 	    mount(PageCtx, {
@@ -32270,13 +32276,15 @@
 	      header: function header() {
 	        return _react2.default.createElement(_header2.default, {
 	          displayName: 'Header',
-	          logo: logo
+	          logo: logo,
+	          authLink: authLink
 	        });
 	      },
 	      drawer: function drawer() {
 	        return _react2.default.createElement(_drawer2.default, {
 	          displayName: 'Drawer',
-	          logo: logo
+	          logo: logo,
+	          authLink: authLink
 	        });
 	      },
 	      sections: []
@@ -32285,6 +32293,7 @@
 
 	  page();
 	};
+	// import Home from './components/home.jsx';
 
 /***/ },
 /* 369 */
@@ -32470,13 +32479,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = (0, _mantraCore.composeAll)((0, _mantraCore.compose)(_composer.composeLogo), (0, _mantraCore.useDeps)(_composer.injectAuthAction))(_header2.default);
+	exports.default = (0, _mantraCore.composeAll)((0, _mantraCore.compose)(_composer.composeAuthLink), (0, _mantraCore.compose)(_composer.composeLogo), (0, _mantraCore.useDeps)(_composer.injectAuthAction))(_header2.default);
 
 /***/ },
 /* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -32502,58 +32511,28 @@
 	  function Header() {
 	    _classCallCheck(this, Header);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this));
-
-	    _this.handleAuth = _this.handleAuth.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).apply(this, arguments));
 	  }
 
 	  _createClass(Header, [{
-	    key: 'handleAuth',
-	    value: function handleAuth() {
-	      var _props = this.props;
-	      var login = _props.login;
-	      var logout = _props.logout;
-	      var authData = _props.authData;
-
-	      if (authData) {
-	        logout();
-	      } else {
-	        login();
-	      }
-	    }
-	  }, {
-	    key: 'renderText',
-	    value: function renderText(authData) {
-	      return authData ? 'Logout' : 'Login / Signup';
-	    }
-	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      var _props2 = this.props;
-	      var authData = _props2.authData;
-	      var logo = _props2.logo;
+	      var _props = this.props;
+	      var logo = _props.logo;
+	      var authLink = _props.authLink;
 
 	      return _react2.default.createElement(
-	        'header',
-	        { className: 'mdl-layout__header v1-header' },
+	        "header",
+	        { className: "mdl-layout__header v1-header" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'mdl-layout__header-row' },
+	          "div",
+	          { className: "mdl-layout__header-row" },
 	          logo && typeof logo === 'function' ? logo() : null,
-	          _react2.default.createElement('div', { className: 'mdl-layout-spacer' }),
+	          _react2.default.createElement("div", { className: "mdl-layout-spacer" }),
 	          _react2.default.createElement(
-	            'nav',
-	            { className: 'mdl-navigation' },
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'mdl-navigation__link',
-	                onClick: this.handleAuth,
-	                href: ''
-	              },
-	              this.renderText(authData)
-	            )
+	            "nav",
+	            { className: "mdl-navigation" },
+	            authLink && typeof authLink === 'function' ? authLink() : null
 	          )
 	        )
 	      );
@@ -32585,19 +32564,50 @@
 	};
 
 	var composeAuth = exports.composeAuth = function composeAuth(_ref, onData) {
-	  // const {location, Firebase} = context();
-	  // const ref = new Firebase(location);
-	  // ref.onAuth((authData) => {
-	  //   onData(null, {authData});
-	  // });
-
 	  var context = _ref.context;
+
+	  var _context2 = context();
+
+	  var firebase = _context2.firebase;
+
+	  firebase.auth().getRedirectResult().then(function (result) {
+	    var user = result.user;
+
+	    if (user) {
+	      onData(null, { authData: user });
+	    } else {
+	      firebase.auth().onAuthStateChanged(function (authData) {
+	        if (authData) {
+	          onData(null, { authData: authData });
+	        } else {
+	          onData(null, {});
+	        }
+	      });
+	    }
+	  }).catch(function (error) {
+	    // Handle Errors here.
+	    var errorCode = error.code;
+	    var errorMessage = error.message;
+	    // The email of the user's account used.
+	    var email = error.email;
+	    // The firebase.auth.AuthCredential type that was used.
+	    var credential = error.credential;
+	    // ...
+	    console.log(error);
+	    onData(null, {});
+	  });
 	};
 
 	var composeLogo = exports.composeLogo = function composeLogo(_ref2, onData) {
 	  var logo = _ref2.logo;
 
 	  onData(null, { logo: logo });
+	};
+
+	var composeAuthLink = exports.composeAuthLink = function composeAuthLink(_ref3, onData) {
+	  var authLink = _ref3.authLink;
+
+	  onData(null, { authLink: authLink });
 	};
 
 /***/ },
@@ -32620,7 +32630,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = (0, _mantraCore.composeAll)((0, _mantraCore.compose)(_composer.composeLogo), (0, _mantraCore.useDeps)(_composer.injectAuthAction))(_drawer2.default);
+	exports.default = (0, _mantraCore.composeAll)((0, _mantraCore.compose)(_composer.composeAuthLink), (0, _mantraCore.compose)(_composer.composeLogo), (0, _mantraCore.useDeps)(_composer.injectAuthAction))(_drawer2.default);
 
 /***/ },
 /* 375 */
@@ -32652,37 +32662,15 @@
 	  function Drawer() {
 	    _classCallCheck(this, Drawer);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Drawer).call(this));
-
-	    _this.handleAuth = _this.handleAuth.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Drawer).apply(this, arguments));
 	  }
 
 	  _createClass(Drawer, [{
-	    key: 'handleAuth',
-	    value: function handleAuth() {
-	      var _props = this.props;
-	      var login = _props.login;
-	      var logout = _props.logout;
-	      var authData = _props.authData;
-
-	      if (authData) {
-	        logout();
-	      } else {
-	        login();
-	      }
-	    }
-	  }, {
-	    key: 'renderText',
-	    value: function renderText(authData) {
-	      return authData ? 'Logout' : 'Login / Signup';
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props2 = this.props;
-	      var authData = _props2.authData;
-	      var logo = _props2.logo;
+	      var _props = this.props;
+	      var authLink = _props.authLink;
+	      var logo = _props.logo;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -32691,20 +32679,7 @@
 	        _react2.default.createElement(
 	          'nav',
 	          { className: 'mdl-navigation' },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'mdl-navigation__link', href: '' },
-	            'Home'
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'mdl-navigation__link',
-	              onClick: this.handleAuth,
-	              href: ''
-	            },
-	            this.renderText(authData)
-	          )
+	          authLink && typeof authLink === 'function' ? authLink() : null
 	        )
 	      );
 	    }
@@ -32728,6 +32703,105 @@
 
 	// exports
 
+
+/***/ },
+/* 377 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _authLink = __webpack_require__(378);
+
+	var _authLink2 = _interopRequireDefault(_authLink);
+
+	var _mantraCore = __webpack_require__(7);
+
+	var _composer = __webpack_require__(373);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = (0, _mantraCore.composeAll)((0, _mantraCore.compose)(_composer.composeAuth), (0, _mantraCore.useDeps)(_composer.injectAuthAction))(_authLink2.default);
+
+/***/ },
+/* 378 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(49);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AuthLink = function (_React$Component) {
+	  _inherits(AuthLink, _React$Component);
+
+	  function AuthLink() {
+	    _classCallCheck(this, AuthLink);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthLink).call(this));
+
+	    _this.handleAuth = _this.handleAuth.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(AuthLink, [{
+	    key: 'handleAuth',
+	    value: function handleAuth() {
+	      var _props = this.props;
+	      var login = _props.login;
+	      var logout = _props.logout;
+	      var authData = _props.authData;
+
+	      if (authData) {
+	        logout();
+	      } else {
+	        login();
+	      }
+	    }
+	  }, {
+	    key: 'renderText',
+	    value: function renderText(authData) {
+	      return authData ? 'Logout ' + authData.displayName : 'Login / Signup';
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var authData = this.props.authData;
+
+	      return _react2.default.createElement(
+	        'a',
+	        {
+	          className: 'mdl-navigation__link',
+	          onClick: this.handleAuth,
+	          href: ''
+	        },
+	        this.renderText(authData)
+	      );
+	    }
+	  }]);
+
+	  return AuthLink;
+	}(_react2.default.Component);
+
+	exports.default = AuthLink;
 
 /***/ }
 /******/ ]);

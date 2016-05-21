@@ -15,7 +15,6 @@ export const initContext = () => {
     storageBucket: 'project-nice.appspot.com',
   };
 
-  console.log(firebase);
   firebase.initializeApp(config);
   const database = firebase.database();
 
