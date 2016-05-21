@@ -1,4 +1,3 @@
-// const firebase = require('firebase');
 const firebase = global.firebase;
 // import firebase from 'firebase';
 import {mount} from 'react-mounter';

@@ -26778,7 +26778,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// const firebase = require('firebase');
 	var firebase = global.firebase;
 	// import firebase from 'firebase';
 	var initContext = exports.initContext = function initContext() {
