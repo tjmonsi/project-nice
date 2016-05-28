@@ -12,3 +12,4 @@ const app = createApp(context);
 
 app.loadModule(coreModule);
 app.init();
+context.page();

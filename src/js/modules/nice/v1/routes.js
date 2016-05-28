@@ -5,6 +5,8 @@ import LogoText from './components/logo-text.jsx';
 import AuthLink from './containers/auth-link';
 import Header from './containers/header';
 import Drawer from './containers/drawer';
+import HomeCarousel from './containers/home-carousel';
+import ArticleBanner from './containers/article-banner';
 
 export default (injectDeps, context) => {
   const {mount, page, qs} = context;
@@ -14,6 +16,10 @@ export default (injectDeps, context) => {
   }));
   const authLink = () => (React.createElement(AuthLink, {
     displayName: 'AuthLink'
+  }));
+  const articleBanner = (articleId) => (React.createElement(ArticleBanner, {
+    displayName: 'ArticleBanner',
+    articleId
   }));
 
   page('/', (ctx) => {
@@ -29,9 +35,12 @@ export default (injectDeps, context) => {
         logo,
         authLink
       })),
-      sections: []
+      sections: [
+        () => (React.createElement(HomeCarousel, {
+          displayName: 'HomeCarousel',
+          articleBanner
+        }))
+      ]
     });
   });
-
-  page();
 };

@@ -1,5 +1,5 @@
-const firebase = global.firebase;
-// import firebase from 'firebase';
+// const firebase = global.firebase;
+import firebase from 'firebase';
 import {mount} from 'react-mounter';
 import page from 'page';
 import qs from 'qs';
@@ -16,12 +16,10 @@ export const initContext = () => {
   };
 
   firebase.initializeApp(config);
-  const database = firebase.database();
 
   return {
     mount,
     firebase,
-    database,
     store,
     page,
     qs,
