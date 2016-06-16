@@ -14,7 +14,7 @@ class AuthLink extends React.Component {
     }
   }
   renderText(authData) {
-    return authData ? `Logout ${authData.displayName}` : 'Login / Signup';
+    return authData ? 'Logout' : 'Login';
   }
   render() {
     const {authData} = this.props;

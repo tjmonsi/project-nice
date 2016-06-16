@@ -1,0 +1,30 @@
+.v1-article-banner {
+  padding-left: 30px;
+    padding-right: 30px;
+  .v1-article-banner-text-container {
+    height: inherit;
+    text-align: center;
+
+    .v1-article-banner-title {
+      color: #fff;
+      text-align: center;
+      line-height: 1;
+      margin-bottom: 15px;
+      margin-top: 0px;
+    }
+    .v1-article-banner-excerpt {
+      color: #fff;
+      text-align: center;
+      width: 100%;
+      a {
+        color: #fff;
+      }
+    }
+    .v1-article-banner-author {
+      border-top: 1px solid white;
+      color: #fff;
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+  }
+}

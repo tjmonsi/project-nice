@@ -3,6 +3,7 @@ import {createStore} from 'redux';
 const defaultState = {
   snack: [],
   homeBanner: null
+
 };
 
 export default createStore((state = defaultState, action) => {

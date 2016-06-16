@@ -22,7 +22,7 @@ export default (injectDeps, context) => {
     articleId
   }));
 
-  page('/', (ctx) => {
+  page('/old', (ctx) => {
     mount(PageCtx, {
       displayName: 'PageCtx',
       header: () => (React.createElement(Header, {

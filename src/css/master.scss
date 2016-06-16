@@ -1,3 +1,11 @@
 @import './../../node_modules/material-design-lite/dist/material.css';
-@import './../js/modules/nice/v1/index'
+@import './../js/modules/comp-lib/v1/index';
+@import './../js/modules/main/v1/index';
 
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Libre Baskerville', serif;
+}

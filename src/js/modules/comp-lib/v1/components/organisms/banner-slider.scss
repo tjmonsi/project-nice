@@ -1,0 +1,8 @@
+@import './../prefix';
+
+.#{$prefix}-banner-slide {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: auto !important;
+}

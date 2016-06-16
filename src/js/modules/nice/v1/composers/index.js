@@ -6,6 +6,7 @@ import composeLogo from './compose-logo';
 import composeFrontPublished from './compose-front-published';
 import composePublished from './compose-published';
 import composeArticle from './compose-article';
+import composeHomeBanner from './compose-home-banner';
 
 export default {
   injectAuthAction,
@@ -15,5 +16,6 @@ export default {
   composeLogo,
   composeFrontPublished,
   composePublished,
-  composeArticle
+  composeArticle,
+  composeHomeBanner
 };

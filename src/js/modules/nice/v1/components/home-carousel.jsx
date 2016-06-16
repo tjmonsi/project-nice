@@ -1,11 +1,16 @@
 import React from 'react';
+import classNames from 'classnames';
 
 class HomeCarousel extends React.Component {
   renderArticleBanner() {
-    const {front_published, articleBanner} = this.props;
+    const {front_published, articleBanner, homeBanner} = this.props;
+    const articleId = homeBanner ? homeBanner : front_published[0];
+
     return front_published ? front_published.map((item, key) => {
+      const homeBannerFlag = articleId !== item ? 'v1-home-carousel-article-banner-hidden' : '';
+      const className = classNames('v1-home-carousel-article-banner', homeBannerFlag);
       return (
-        <div className="v1-article-banner">
+        <div className={className}>
           {articleBanner(item)}
         </div>
       );
@@ -14,7 +19,7 @@ class HomeCarousel extends React.Component {
   render() {
     // const {suistainable, articleBanner} = this.props;
     return (
-      <div className="mdl-cell mdl-cell--12-col v1-home-carousel">
+      <div className="v1-home-carousel">
         {this.renderArticleBanner()}
       </div>
     );

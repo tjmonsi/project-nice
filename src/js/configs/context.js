@@ -4,6 +4,7 @@ import {mount} from 'react-mounter';
 import page from 'page';
 import qs from 'qs';
 import store from './store';
+import articleStore from './article-store';
 import _ from 'underscore';
 
 export const initContext = () => {
@@ -21,6 +22,7 @@ export const initContext = () => {
     mount,
     firebase,
     store,
+    articleStore,
     page,
     qs,
     _

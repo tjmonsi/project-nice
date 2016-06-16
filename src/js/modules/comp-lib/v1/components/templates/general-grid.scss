@@ -1,0 +1,11 @@
+@import './../prefix';
+@import 'src/css/palette.scss';
+
+.#{$prefix}-general-grid {
+  .#{$prefix}-general-grid-title {
+    h1 {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+  }
+}
